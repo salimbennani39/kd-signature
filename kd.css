@@ -145,12 +145,15 @@ body { background: var(--sc-canvas); }
   /* Phone: the name sits on plaster above the photograph instead of in the
      sky, and the plate fades up into that ground. */
   .hero__stage { background: #F3F2EE; }
-  .hero__far, .hero__near { top: max(30svh, 23rem); }
-  .hero__far img, .hero__near img { object-position: 62% 50%; }
+  .hero__far, .hero__near { top: calc(var(--kd-bar-h) + 3svh + 2 * min(11.6vw, 5.2rem) + 10.5rem); }
+  /* On phones the copy sits on plaster above the photo, clear of the chairs, so it stays. */
+  .hero__copy { opacity: 1 !important; transform: none !important; }
+  .hero__far, .hero__near { overflow: clip; }
+  .hero__far img, .hero__near img { top: auto; bottom: 0; height: 128%; object-position: 60% 100%; }
   .hero__far { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%); }
-  .hero__title { top: calc(var(--kd-bar-h) + 4svh); white-space: normal; font-size: clamp(2.6rem, 12.4vw, 5.2rem); }
+  .hero__title { top: calc(var(--kd-bar-h) + 3svh); white-space: normal; font-size: min(11.6vw, 5.2rem); padding-inline: var(--sc-gutter); }
   .hero__title span { display: block; }
-  .hero__copy { left: var(--sc-gutter); right: var(--sc-gutter); top: calc(var(--kd-bar-h) + 4svh + 2 * clamp(2.6rem, 12.4vw, 5.2rem) + 2rem); bottom: auto; max-width: none; justify-items: center; text-align: center; gap: var(--sc-4); }
+  .hero__copy { left: var(--sc-gutter); right: var(--sc-gutter); top: calc(var(--kd-bar-h) + 3svh + 2 * min(11.6vw, 5.2rem) + 1.6rem); bottom: auto; max-width: none; justify-items: center; text-align: center; gap: var(--sc-4); }
   .hero__lede { font-size: var(--sc-t-base); max-width: 30ch; }
   .hero__palm { display: none; }
   .hero__near { transform: translate3d(0, calc(var(--sc-p, 0) * 2svh), 0) scale(calc(1 + var(--sc-p, 0) * .45)); }
@@ -314,7 +317,7 @@ body { background: var(--sc-canvas); }
 @media (hover: hover) and (pointer: fine) { .close__options a:hover { background: rgba(4, 11, 19, .85); border-color: #F1F5F6; } }
 
 /* The float: the booking line sits on the water and the water answers it. */
-.float { position: absolute; z-index: var(--sc-z-copy); left: 64%; top: 70%; translate: -50% -50%; color: #04202A; }
+.float { position: absolute; z-index: var(--sc-z-copy); left: 72%; top: 70%; translate: -50% -50%; color: #04202A; }
 .float__btn {
   display: grid; justify-items: center; gap: .15rem; text-decoration: none;
   background: #F6F5F1; color: #04202A; padding: 1.05rem 2.2rem 1rem; border-radius: var(--sc-r-pill);
@@ -338,7 +341,8 @@ body { background: var(--sc-canvas); }
   .close__head .kd-logo { width: 4.6rem; margin-bottom: 0; }
   .close__title { font-size: clamp(1.7rem, 7vw, 2.3rem); }
   .close__lede { font-size: var(--sc-t-base); }
-  .float { left: 50%; top: 69%; }
+  .float { left: auto; right: var(--sc-gutter); top: 70%; translate: 0 -50%; }
+  .float__btn { padding: .9rem 1.5rem .85rem; }
   .foot { bottom: 1rem; gap: .2rem 1.2rem; font-size: var(--sc-t-xs); }
   .foot__small { margin-left: 0 !important; width: 100%; }
 }

@@ -63,6 +63,20 @@
   }
   requestAnimationFrame(barFrame);
 
+  /* ------------------------------------- 1b. the name always fits the screen */
+  // Fluid type can still overflow when the phone's text size is raised, so the
+  // title is measured and stepped down until its longest word fits.
+  var title = document.querySelector('.hero__title');
+  function fitTitle() {
+    if (!title) return;
+    title.style.fontSize = '';
+    var size = parseFloat(getComputedStyle(title).fontSize), guard = 40;
+    while (title.scrollWidth > title.clientWidth + 1 && guard-- > 0) { size *= 0.96; title.style.fontSize = size + 'px'; }
+  }
+  fitTitle();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
+  addEventListener('resize', fitTitle, { passive: true });
+
   /* ----------------------------------------------- 2. the room caption flip */
   var tableAct = document.querySelector('#table');
   var room = document.querySelector('.room');
@@ -185,7 +199,7 @@
     // image-space focus of the dive and the spout that keeps the water alive
     this.focus = m ? [0.62, 0.74] : [0.66, 0.74];
     this.spout = m ? [0.385, 0.66] : [0.453, 0.66];
-    this.pos = m ? [0.6, 0.5] : [0.66, 0.5];
+    this.pos = m ? (this.kind === 'close' ? [0.72, 0.5] : [0.6, 0.5]) : [0.66, 0.5];
     Promise.all([loadImage(day), loadImage(night), loadImage(mask)]).then(function (im) {
       self.imgAspect = im[0].naturalWidth / im[0].naturalHeight;
       self.tex = im.map(function (img, k) {
